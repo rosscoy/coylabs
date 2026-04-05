@@ -22,7 +22,7 @@ function FooterLogo() {
         </span>
       </div>
       <span style={{ fontWeight: 700, fontSize: 18, color: '#FAFAF8' }}>
-        Coylabs
+        Coylabs Development
       </span>
     </div>
   )
@@ -62,7 +62,7 @@ export default function Footer() {
           style={{ borderTop: '1px solid #2A2A2A' }}
         >
           <p style={{ fontSize: 13, color: '#6B7280' }}>
-            © 2026 Coylabs · Dublin, Ireland
+            © 2026 Coylabs Development · Dublin, Ireland
           </p>
           <a
             href="mailto:hello@coylabs.dev"

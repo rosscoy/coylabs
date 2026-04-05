@@ -122,7 +122,7 @@ export default function Work() {
           className="font-bold text-ink mt-2"
           style={{ fontSize: 'clamp(28px, 4vw, 42px)' }}
         >
-          Built by Coylabs
+          Built by Coylabs Development
         </h2>
         <p className="text-muted mt-2" style={{ fontSize: 16 }}>
           A selection of sites and apps we've shipped.

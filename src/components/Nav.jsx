@@ -30,7 +30,7 @@ function Logo({ inverted = false }) {
           color: inverted ? '#FAFAF8' : '#1A1A1A',
         }}
       >
-        Coylabs
+        Coylabs Development
       </span>
     </div>
   )

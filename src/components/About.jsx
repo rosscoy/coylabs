@@ -69,7 +69,7 @@ export default function About() {
               things simple.
             </p>
             <p className="text-muted mt-4" style={{ fontSize: 15, lineHeight: 1.7 }}>
-              I started Coylabs because I kept seeing businesses paying agency
+              I started Coylabs Development because I kept seeing businesses paying agency
               prices for sites that underdelivered. I keep my overheads low and
               pass that on — you get senior developer work at a freelancer's
               rate.

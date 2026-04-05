@@ -126,7 +126,7 @@ function Step2({ form, setForm }) {
 
 function Step3({ form, setForm }) {
   const featureList = ['Contact form', 'Google Maps', 'Image gallery', 'E-commerce', 'Booking system', 'Blog / CMS', 'Newsletter signup', 'Google Analytics', 'Cookie banner', 'Social media links', 'Password-protected pages']
-  const selfUpdateOpts = ['No — Coylabs handles updates', 'Yes — I need a CMS', 'Not sure yet']
+  const selfUpdateOpts = ['No — Coylabs Development handles updates', 'Yes — I need a CMS', 'Not sure yet']
   const toggleFeature = (f) => setForm(fm => ({
     ...fm,
     features: fm.features.includes(f) ? fm.features.filter(x => x !== f) : [...fm.features, f],

@@ -35,13 +35,13 @@ const services = [
     icon: <GlobeIcon />,
     heading: 'Business websites',
     copy: 'Brochure sites, service pages, and landing pages built for Irish SMEs. Fast, mobile-friendly, and set up to rank on Google from day one.',
-    price: 'From €800',
+    price: 'Starting from €800',
   },
   {
     icon: <CodeIcon />,
     heading: 'Web applications',
     copy: 'Custom tools, internal platforms, and interactive apps. Built with React and Firebase — scalable from the start.',
-    price: 'From €1,500',
+    price: 'Starting from €1,500',
   },
   {
     icon: <RefreshIcon />,

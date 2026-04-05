@@ -79,14 +79,6 @@ export default function About() {
             <div className="flex gap-10 mt-8">
               <div>
                 <p className="font-bold text-ink" style={{ fontSize: 28 }}>
-                  5+
-                </p>
-                <p className="text-muted" style={{ fontSize: 13 }}>
-                  years building web apps
-                </p>
-              </div>
-              <div>
-                <p className="font-bold text-ink" style={{ fontSize: 28 }}>
                   Dublin
                 </p>
                 <p className="text-muted" style={{ fontSize: 13 }}>

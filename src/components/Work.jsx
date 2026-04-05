@@ -1,11 +1,11 @@
 const realCards = [
   {
-    title: 'RC Brackets',
+    title: 'Adam Browne Creative',
     description:
-      'A World Cup 2026 prediction league app built for a group of friends. Live match tracking, mini-leagues, and a round-by-round knockout scoring system.',
-    tags: ['React', 'Firebase', 'Vercel'],
-    href: 'https://rc-brackets.vercel.app',
-    note: 'Private app — opens to login screen',
+      'Portfolio and services website for Dublin-based creative director Adam Browne. Clean, image-led design built to showcase his work and attract new clients.',
+    tags: ['React', 'Vercel'],
+    href: 'https://adambrowne.creative',
+    note: null,
   },
   {
     title: 'RC Golf Sweeps',

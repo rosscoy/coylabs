@@ -1,10 +1,13 @@
+import { BackgroundPaths } from './ui/background-paths'
+
 export default function Hero() {
   return (
     <section
       id="home"
-      className="bg-warm min-h-screen flex items-center justify-center px-6 pt-16"
+      className="bg-warm min-h-screen flex items-center justify-center px-6 pt-16 relative"
     >
-      <div className="max-w-3xl w-full text-center mx-auto">
+      <BackgroundPaths />
+      <div className="relative z-10 max-w-3xl w-full text-center mx-auto">
         {/* Badge */}
         <div className="inline-block mb-8">
           <span

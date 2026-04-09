@@ -204,7 +204,7 @@ function Step4({ form, setForm, errors }) {
 function SuccessCard({ name }) {
   return (
     <div className="bg-surface rounded-xl p-10 text-center border-2 border-accent mx-auto" style={{ maxWidth: 480 }}>
-      <svg className="mx-auto mb-5" width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="#C96A2A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <svg className="mx-auto mb-5" width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="#05AD98" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <circle cx="24" cy="24" r="20" />
         <polyline points="16 24 21 29 32 18" />
       </svg>
@@ -284,7 +284,7 @@ export default function IntakeForm() {
       {/* Progress */}
       <div className="mb-8">
         <p className="text-muted font-medium" style={{ fontSize: 13 }}>Step {step} of 4</p>
-        <div className="mt-2 w-full h-[3px] rounded-full" style={{ background: '#E7E5E0' }}>
+        <div className="mt-2 w-full h-[3px] rounded-full" style={{ background: '#BBBFBF' }}>
           <div
             className="h-[3px] rounded-full bg-accent"
             style={{ width: progress, transition: 'width 300ms ease' }}
@@ -304,8 +304,8 @@ export default function IntakeForm() {
             type="button"
             onClick={handleBack}
             className="font-semibold rounded-lg px-6 py-2.5 text-sm transition-colors"
-            style={{ border: '1.5px solid #C96A2A', color: '#C96A2A', background: 'transparent' }}
-            onMouseEnter={e => { e.currentTarget.style.background = '#FEF3C7' }}
+            style={{ border: '1.5px solid #05AD98', color: '#05AD98', background: 'transparent' }}
+            onMouseEnter={e => { e.currentTarget.style.background = '#D9F5F2' }}
             onMouseLeave={e => { e.currentTarget.style.background = 'transparent' }}
           >
             ← Back

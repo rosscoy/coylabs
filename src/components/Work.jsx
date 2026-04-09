@@ -22,8 +22,8 @@ function TagPill({ label }) {
     <span
       className="text-muted font-medium"
       style={{
-        background: '#F5F4F0',
-        border: '1px solid #E7E5E0',
+        background: '#EAEBEB',
+        border: '1px solid #BBBFBF',
         borderRadius: 999,
         padding: '3px 10px',
         fontSize: 11,
@@ -78,7 +78,7 @@ function PlaceholderCard() {
     <div
       className="bg-surface flex flex-col p-6"
       style={{
-        border: '1px dashed #E7E5E0',
+        border: '1px dashed #BBBFBF',
         borderRadius: 12,
         opacity: 0.5,
       }}

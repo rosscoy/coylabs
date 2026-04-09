@@ -10,8 +10,8 @@ export default function Hero() {
           <span
             className="text-xs font-medium rounded-full px-[14px] py-1"
             style={{
-              background: '#FEF3C7',
-              color: '#92400E',
+              background: '#D9F5F2',
+              color: '#047a6c',
               borderRadius: 999,
             }}
           >
@@ -69,7 +69,7 @@ export default function Hero() {
               border: '1.5px solid #E7E5E0',
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.borderColor = '#C96A2A'
+              e.currentTarget.style.borderColor = '#05AD98'
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.borderColor = '#E7E5E0'
@@ -84,7 +84,7 @@ export default function Hero() {
           className="flex items-center justify-center flex-wrap gap-2 text-muted"
           style={{ marginTop: 48, fontSize: 13 }}
         >
-          <span>React &amp; Firebase specialists</span>
+          <span>Design-led development</span>
           <span>·</span>
           <span>Based in Dublin</span>
           <span>·</span>

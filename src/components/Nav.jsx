@@ -8,7 +8,7 @@ function Logo({ inverted = false }) {
         style={{
           width: 34,
           height: 34,
-          background: '#C96A2A',
+          background: '#05AD98',
           borderRadius: 8,
         }}
       >

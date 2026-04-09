@@ -7,13 +7,13 @@ export default {
   theme: {
     extend: {
       colors: {
-        accent:  { DEFAULT: '#C96A2A', hover: '#A3531F' },
+        accent:  { DEFAULT: '#05AD98', hover: '#048a7a' },
         surface: '#FFFFFF',
-        warm:    '#FAFAF8',
-        border:  '#E7E5E0',
-        tagbg:   '#F5F4F0',
+        warm:    '#F3F4F4',
+        border:  '#BBBFBF',
+        tagbg:   '#EAEBEB',
         ink:     '#1A1A1A',
-        muted:   '#6B7280',
+        muted:   '#878787',
       },
       fontFamily: {
         sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],

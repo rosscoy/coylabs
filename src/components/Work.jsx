@@ -110,7 +110,7 @@ function PlaceholderCard() {
 
 export default function Work() {
   return (
-    <section id="work" className="bg-surface py-20 px-6">
+    <section id="work" className="py-20 px-6">
       <div className="max-w-5xl mx-auto">
         <p
           className="text-accent font-semibold uppercase"

@@ -2,7 +2,7 @@ import IntakeForm from './IntakeForm'
 
 export default function QuoteSection() {
   return (
-    <section id="quote" className="bg-warm py-20 px-6">
+    <section id="quote" className="py-20 px-6">
       <div className="max-w-[720px] mx-auto">
         <p
           className="text-accent font-semibold uppercase"

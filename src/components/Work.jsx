@@ -8,12 +8,28 @@ const realCards = [
     note: null,
   },
   {
-    title: 'RC Golf Sweeps',
+    title: 'Mandalas by Cheryl',
     description:
-      'A fantasy golf competition app for the four major tournaments. Tier-based player picks, a live ESPN leaderboard, and full admin controls.',
+      'Showcase website for mandala artist Cheryl, presenting her handcrafted artwork in a warm, gallery-style layout designed to attract commissions and sales.',
+    tags: ['React', 'Vercel'],
+    href: 'https://mandalasbycheryl.com/',
+    note: null,
+  },
+  {
+    title: 'UtilityWatch',
+    description:
+      'A utility contract tracker that helps households monitor their energy and broadband deals, flag expiry dates, and avoid costly auto-renewals.',
     tags: ['React', 'Firebase', 'Vercel'],
-    href: 'https://rc-golf-sweeps.vercel.app',
-    note: 'Private app — opens to login screen',
+    href: 'https://utilitywatch.vercel.app/',
+    note: 'Register free to explore',
+  },
+  {
+    title: 'RC Food Planner',
+    description:
+      'A personal meal planning app for organising weekly dinners, managing ingredients, and cutting down on food waste.',
+    tags: ['React', 'Vercel'],
+    href: 'https://rc-food-planner.vercel.app/',
+    note: null,
   },
 ]
 
@@ -73,40 +89,6 @@ function RealCard({ title, description, tags, href, note }) {
   )
 }
 
-function PlaceholderCard() {
-  return (
-    <div
-      className="bg-surface flex flex-col p-6"
-      style={{
-        border: '1px dashed #BBBFBF',
-        borderRadius: 12,
-        opacity: 0.5,
-      }}
-    >
-      <div className="flex items-start justify-between gap-3 flex-wrap">
-        <h3 className="font-bold text-ink" style={{ fontSize: 18 }}>
-          Coming soon
-        </h3>
-        <div className="flex flex-wrap gap-1.5">
-          {['React', 'Vercel'].map((t) => (
-            <TagPill key={t} label={t} />
-          ))}
-        </div>
-      </div>
-      <p className="text-muted mt-2.5 flex-1" style={{ fontSize: 14, lineHeight: 1.6 }}>
-        Next client project — details to follow.
-      </p>
-      <div className="mt-4">
-        <span
-          className="text-muted font-semibold"
-          style={{ fontSize: 14, cursor: 'default' }}
-        >
-          In progress
-        </span>
-      </div>
-    </div>
-  )
-}
 
 export default function Work() {
   return (
@@ -132,8 +114,6 @@ export default function Work() {
           {realCards.map((card) => (
             <RealCard key={card.title} {...card} />
           ))}
-          <PlaceholderCard />
-          <PlaceholderCard />
         </div>
 
         <p className="text-center text-muted mt-10" style={{ fontSize: 14 }}>

@@ -8,17 +8,17 @@ export default function QuoteSection() {
           className="text-accent font-semibold uppercase"
           style={{ fontSize: 12, letterSpacing: '0.1em' }}
         >
-          START A PROJECT
+          GET IN TOUCH
         </p>
         <h2
           className="font-bold text-ink mt-2"
           style={{ fontSize: 'clamp(28px, 4vw, 42px)' }}
         >
-          Tell us about your website.
+          Let's start the conversation.
         </h2>
-        <p className="text-muted mt-2 mb-10" style={{ fontSize: 16 }}>
-          Fill in the form and we'll come back to you within 24 hours with a
-          no-obligation quote.
+        <p className="text-muted mt-2 mb-10" style={{ fontSize: 16, lineHeight: 1.7 }}>
+          Drop me a quick note and I'll come back to you within 24 hours.
+          No pressure — just a conversation.
         </p>
         <IntakeForm />
       </div>

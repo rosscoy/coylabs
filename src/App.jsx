@@ -6,8 +6,15 @@ import About from './components/About'
 import QuoteSection from './components/QuoteSection'
 import Footer from './components/Footer'
 import { BackgroundPaths } from './components/ui/background-paths'
+import ClientBriefPage from './pages/ClientBriefPage'
+
+const path = window.location.pathname
 
 export default function App() {
+  if (path === '/brief') {
+    return <ClientBriefPage />
+  }
+
   return (
     <div className="font-sans bg-warm text-ink">
       <BackgroundPaths />

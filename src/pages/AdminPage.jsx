@@ -168,7 +168,7 @@ function Dashboard() {
           <button onClick={() => setEditing('new')} className={btnPrimary}>+ Add project</button>
         )}
       </div>
-      <p className="text-muted mt-2 text-sm">Changes show on coylabs.dev straight away. Use the arrows to reorder.</p>
+      <p className="text-muted mt-2 text-sm">Changes show on the website straight away. Use the arrows to reorder.</p>
 
       {error && <p className="mt-4 text-sm" style={{ color: '#FF6B6B' }}>{error}</p>}
 

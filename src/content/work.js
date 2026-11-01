@@ -1,6 +1,6 @@
 // RECENT WORK (built-in defaults)
 // ------------------------------------------------------------------
-// The live cards are now managed at coylabs.dev/admin. This file is only
+// The live cards are now managed at www.coylabsdevelopment.com/admin. This file is only
 // used if the admin database is empty or can't be reached, and as the
 // source for the "Import built-in cards" button in the admin panel.
 //

@@ -2,7 +2,8 @@
 
 ## What this is
 Production website for Ross Coy's freelance web development business.
-Single-page React app, deployed to Vercel at coylabs.dev.
+Live at www.coylabsdevelopment.com.
+Single-page React app, deployed to Vercel at www.coylabsdevelopment.com.
 
 ## Stack
 - React 18 + Vite
@@ -74,7 +75,7 @@ Formspree endpoint is live: https://formspree.io/f/xwvwappg
 
 ## Deployment
 Push to GitHub and connect to Vercel. The vercel.json handles SPA routing.
-Set domain to coylabs.dev in the Vercel project settings.
+Live domain: www.coylabsdevelopment.com (apex redirects to www). Also coylabs.vercel.app. coylabs.dev is NOT attached to the Vercel project.
 
 ## Contact
 hello@coylabs.dev

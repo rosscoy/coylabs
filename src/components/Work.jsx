@@ -1,45 +1,12 @@
-const realCards = [
-  {
-    title: 'Adam Browne Creative',
-    description:
-      'Portfolio and services website for Dublin-based creative director Adam Browne. Clean, image-led design built to showcase his work and attract new clients.',
-    tags: ['React', 'Vercel'],
-    href: 'https://adambrowne.creative',
-    note: null,
-  },
-  {
-    title: 'Mandalas by Cheryl',
-    description:
-      'Showcase website for mandala artist Cheryl, presenting her handcrafted artwork in a warm, gallery-style layout designed to attract commissions and sales.',
-    tags: ['React', 'Vercel'],
-    href: 'https://mandalasbycheryl.com/',
-    note: null,
-  },
-  {
-    title: 'UtilityWatch',
-    description:
-      'A utility contract tracker that helps households monitor their energy and broadband deals, flag expiry dates, and avoid costly auto-renewals.',
-    tags: ['React', 'Firebase', 'Vercel'],
-    href: 'https://utilitywatch.vercel.app/',
-    note: 'Register free to explore',
-  },
-  {
-    title: 'RC Food Planner',
-    description:
-      'A personal meal planning app for organising weekly dinners, managing ingredients, and cutting down on food waste.',
-    tags: ['React', 'Vercel'],
-    href: 'https://rc-food-planner.vercel.app/',
-    note: null,
-  },
-]
+import work from '../content/work'
 
 function TagPill({ label }) {
   return (
     <span
       className="text-muted font-medium"
       style={{
-        background: '#EAEBEB',
-        border: '1px solid #BBBFBF',
+        background: '#1A2D40',
+        border: '1px solid #223344',
         borderRadius: 999,
         padding: '3px 10px',
         fontSize: 11,
@@ -111,13 +78,13 @@ export default function Work() {
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
-          {realCards.map((card) => (
+          {work.filter((card) => !card.hidden).map((card) => (
             <RealCard key={card.title} {...card} />
           ))}
         </div>
 
         <p className="text-center text-muted mt-10" style={{ fontSize: 14 }}>
-          More work available on request — get in touch to see examples relevant
+          More work available on request. Get in touch to see examples relevant
           to your sector.
         </p>
       </div>

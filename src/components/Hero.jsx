@@ -10,8 +10,8 @@ export default function Hero() {
           <span
             className="text-xs font-medium rounded-full px-[14px] py-1"
             style={{
-              background: '#D9F5F2',
-              color: '#047a6c',
+              background: '#003D52',
+              color: '#00C8FF',
               borderRadius: 999,
             }}
           >
@@ -45,7 +45,7 @@ export default function Hero() {
             margin: '20px auto 0',
           }}
         >
-          Good websites don't come from briefs — they come from conversations.
+          Good websites don't come from briefs. They come from conversations.
           We build your site, you build your business.
         </p>
 
@@ -56,7 +56,7 @@ export default function Hero() {
         >
           <a
             href="#work"
-            className="bg-accent hover:bg-accent-hover text-white font-semibold rounded-lg transition-colors"
+            className="bg-accent hover:bg-accent-hover text-warm font-semibold rounded-lg transition-colors"
             style={{ padding: '12px 24px' }}
           >
             See our work →
@@ -66,13 +66,13 @@ export default function Hero() {
             className="font-semibold rounded-lg transition-colors text-ink hover:text-accent"
             style={{
               padding: '12px 24px',
-              border: '1.5px solid #E7E5E0',
+              border: '1.5px solid #223344',
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.borderColor = '#05AD98'
+              e.currentTarget.style.borderColor = '#00C8FF'
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.borderColor = '#E7E5E0'
+              e.currentTarget.style.borderColor = '#223344'
             }}
           >
             Get a quote

@@ -1,3 +1,5 @@
+import { Logo } from './Nav'
+
 const links = [
   { label: 'Work', href: '#work' },
   { label: 'Services', href: '#services' },
@@ -5,38 +7,15 @@ const links = [
   { label: 'Get a Quote', href: '#quote' },
 ]
 
-function FooterLogo() {
-  return (
-    <div className="flex items-center gap-3">
-      <div
-        className="flex items-center justify-center flex-shrink-0"
-        style={{
-          width: 34,
-          height: 34,
-          background: '#05AD98',
-          borderRadius: 8,
-        }}
-      >
-        <span style={{ color: '#fff', fontWeight: 700, fontSize: 14, letterSpacing: '-0.5px' }}>
-          CL
-        </span>
-      </div>
-      <span style={{ fontWeight: 700, fontSize: 18, color: '#FAFAF8' }}>
-        Coylabs Development
-      </span>
-    </div>
-  )
-}
-
 export default function Footer() {
   return (
-    <footer style={{ background: '#0E1918' }}>
+    <footer style={{ background: '#091524' }}>
       <div className="max-w-6xl mx-auto px-6">
         {/* Row 1 */}
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 py-8">
           <div>
-            <FooterLogo />
-            <p className="mt-2" style={{ fontSize: 11, color: '#878787', letterSpacing: '0.02em' }}>
+            <Logo />
+            <p className="mt-2" style={{ fontSize: 11, color: '#7895A8', letterSpacing: '0.02em' }}>
               Bespoke web design &amp; development.
             </p>
           </div>
@@ -46,9 +25,9 @@ export default function Footer() {
                 key={l.href}
                 href={l.href}
                 className="transition-colors"
-                style={{ fontSize: 14, color: '#878787' }}
-                onMouseEnter={e => { e.currentTarget.style.color = '#FAFAF8' }}
-                onMouseLeave={e => { e.currentTarget.style.color = '#878787' }}
+                style={{ fontSize: 14, color: '#7895A8' }}
+                onMouseEnter={e => { e.currentTarget.style.color = '#E8F4FF' }}
+                onMouseLeave={e => { e.currentTarget.style.color = '#7895A8' }}
               >
                 {l.label}
               </a>
@@ -59,17 +38,17 @@ export default function Footer() {
         {/* Row 2 */}
         <div
           className="flex flex-col md:flex-row md:items-center md:justify-between gap-2 py-5"
-          style={{ borderTop: '1px solid #1D2E2D' }}
+          style={{ borderTop: '1px solid #152233' }}
         >
-          <p style={{ fontSize: 13, color: '#878787' }}>
+          <p style={{ fontSize: 13, color: '#7895A8' }}>
             © 2026 Coylabs Development · Dublin, Ireland
           </p>
           <a
             href="mailto:hello@coylabs.dev"
             className="transition-colors"
-            style={{ fontSize: 13, color: '#878787' }}
-            onMouseEnter={e => { e.currentTarget.style.color = '#FAFAF8' }}
-            onMouseLeave={e => { e.currentTarget.style.color = '#878787' }}
+            style={{ fontSize: 13, color: '#7895A8' }}
+            onMouseEnter={e => { e.currentTarget.style.color = '#E8F4FF' }}
+            onMouseLeave={e => { e.currentTarget.style.color = '#7895A8' }}
           >
             hello@coylabs.dev
           </a>

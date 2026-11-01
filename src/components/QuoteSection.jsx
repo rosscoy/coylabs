@@ -18,7 +18,7 @@ export default function QuoteSection() {
         </h2>
         <p className="text-muted mt-2 mb-10" style={{ fontSize: 16, lineHeight: 1.7 }}>
           Drop me a quick note and I'll come back to you within 24 hours.
-          No pressure — just a conversation.
+          No pressure, just a conversation.
         </p>
         <IntakeForm />
       </div>

@@ -19,16 +19,16 @@ Single-page React app, deployed to Vercel at coylabs.dev.
 ## Colour tokens (tailwind.config.js)
 | Token         | Hex       | Usage                          |
 |---------------|-----------|--------------------------------|
-| accent        | #C96A2A   | CTAs, highlights, icons        |
-| accent-hover  | #A3531F   | Hover state for accent         |
-| surface       | #FFFFFF   | Cards, nav                     |
-| warm          | #FAFAF8   | Page background                |
-| border        | #E7E5E0   | Borders, dividers              |
-| tagbg         | #F5F4F0   | Tag pills                      |
-| ink           | #1A1A1A   | Primary text, headings         |
-| muted         | #6B7280   | Secondary text                 |
+| accent        | #00C8FF   | CTAs, highlights, icons        |
+| accent-hover  | #33D4FF   | Hover state for accent         |
+| surface       | #172534   | Cards, nav                     |
+| warm          | #0E1B2A   | Page background                |
+| border        | #223344   | Borders, dividers              |
+| tagbg         | #1A2D40   | Tag pills                      |
+| ink           | #E8F4FF   | Primary text, headings         |
+| muted         | #7895A8   | Secondary text                 |
 
-Footer bg: #1A1A1A (ink), footer text: #FAFAF8
+Footer bg: #091524 (deep navy), footer text: #7895A8
 
 ## Typography
 Plus Jakarta Sans (Google Fonts), weights 400/500/600/700. Imported in index.html.
@@ -40,13 +40,15 @@ src/
   components/
     Nav.jsx          — Fixed nav, hamburger mobile menu
     Hero.jsx         — Full-height hero, badge, headline, CTA buttons, trust signals
-    Work.jsx         — 2×2 portfolio grid (2 real + 2 placeholder cards)
+    Work.jsx         — Portfolio grid, reads items from src/content/work.js
     Services.jsx     — 3-column service listing with SVG icons
     About.jsx        — 2-col layout, bio copy, stats, decorative SVG
     QuoteSection.jsx — Section wrapper for IntakeForm
     IntakeForm.jsx   — 4-step multi-step form, Formspree POST, validation
     Chip.jsx         — Reusable chip/tag component (single + multi select)
     Footer.jsx       — Dark footer, inverted logo, nav links, copyright
+  content/
+    work.js          — Recent Work items (Ross edits this directly)
   App.jsx
   main.jsx
   index.css          — Tailwind imports + html { scroll-behavior: smooth }

@@ -1,6 +1,6 @@
 function GlobeIcon() {
   return (
-    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="#05AD98" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="#00C8FF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
       <circle cx="16" cy="16" r="13" />
       <ellipse cx="16" cy="16" rx="5.5" ry="13" />
       <line x1="3" y1="16" x2="29" y2="16" />
@@ -12,7 +12,7 @@ function GlobeIcon() {
 
 function CodeIcon() {
   return (
-    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="#05AD98" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="#00C8FF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
       <polyline points="11 10 5 16 11 22" />
       <polyline points="21 10 27 16 21 22" />
     </svg>
@@ -21,7 +21,7 @@ function CodeIcon() {
 
 function RefreshIcon() {
   return (
-    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="#05AD98" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="#00C8FF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
       <path d="M27 6v7h-7" />
       <path d="M5 26v-7h7" />
       <path d="M7.5 13A11 11 0 0 1 25 11l2 2" />
@@ -35,19 +35,16 @@ const services = [
     icon: <GlobeIcon />,
     heading: 'Business websites',
     copy: 'Brochure sites, service pages, and landing pages built for Irish SMEs. Fast, mobile-friendly, and set up to rank on Google from day one.',
-    price: 'Starting from €800',
   },
   {
     icon: <CodeIcon />,
     heading: 'Web applications',
-    copy: 'Custom tools, internal platforms, and interactive apps. Built with React and Firebase — scalable from the start.',
-    price: 'Starting from €1,500',
+    copy: 'Custom tools, internal platforms, and interactive apps. Built with React and Firebase and ready to scale from the start.',
   },
   {
     icon: <RefreshIcon />,
     heading: 'Ongoing support',
     copy: 'Hosting management, content updates, and new features after launch. Available on a monthly retainer or ad hoc basis.',
-    price: 'Flexible',
   },
 ]
 
@@ -88,12 +85,6 @@ export default function Services() {
               <h3 className="font-bold text-ink text-lg">{s.heading}</h3>
               <p className="text-muted mt-3" style={{ fontSize: 14, lineHeight: 1.7 }}>
                 {s.copy}
-              </p>
-              <p
-                className="font-semibold text-accent mt-3"
-                style={{ fontSize: 13 }}
-              >
-                {s.price}
               </p>
             </div>
           ))}

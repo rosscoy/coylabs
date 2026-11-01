@@ -22,7 +22,7 @@ const init = {
   toolIntegrations: '', needsMultilingual: '', accessibilityLevel: '', needsCMS: '',
   targetKeywords: '', hasAnalytics: '', runningAds: '',
   socialPlatforms: [], socialUrls: '',
-  goLiveDate: '', deadlineType: '', budget: '',
+  goLiveDate: '', deadlineType: '',
   maintenanceNeeded: '', futurePhases: '',
   mainContact: '', approvalContact: '', preferredComms: [],
   updateFrequency: '', contentManager: '',
@@ -32,7 +32,7 @@ function Label({ children, required, hint }) {
   return (
     <label className="block text-sm font-medium text-ink mb-1.5">
       {children}
-      {required && <span style={{ color: '#C96A2A' }} className="ml-0.5">*</span>}
+      {required && <span style={{ color: '#FF6B6B' }} className="ml-0.5">*</span>}
       {hint && <span className="text-muted font-normal ml-2" style={{ fontSize: 12 }}>{hint}</span>}
     </label>
   )
@@ -96,7 +96,7 @@ function Section({ number, title, description, children }) {
       <div className="flex items-start gap-4 mb-6">
         <div
           className="flex items-center justify-center rounded-full flex-shrink-0 mt-0.5"
-          style={{ width: 32, height: 32, background: '#05AD98', fontSize: 14, fontWeight: 700, color: '#fff' }}
+          style={{ width: 32, height: 32, background: '#00C8FF', fontSize: 14, fontWeight: 700, color: '#0E1B2A' }}
         >
           {number}
         </div>
@@ -122,9 +122,9 @@ function SuccessCard({ name }) {
       <div className="bg-surface rounded-2xl border border-border p-10 text-center max-w-md w-full">
         <div
           className="mx-auto mb-5 flex items-center justify-center rounded-full"
-          style={{ width: 56, height: 56, background: '#D9F5F2' }}
+          style={{ width: 56, height: 56, background: '#003D52' }}
         >
-          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="#05AD98" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="#00C8FF" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <circle cx="14" cy="14" r="12" />
             <polyline points="9 14 12.5 17.5 19 11" />
           </svg>
@@ -183,7 +183,7 @@ export default function ClientBriefPage() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify({
-          _subject: `Client Project Brief — ${form.bizName}`,
+          _subject: `Client Project Brief: ${form.bizName}`,
           form_type: 'client_brief',
           ...form,
           primaryPurpose: form.primaryPurpose.join(', '),
@@ -227,19 +227,19 @@ export default function ClientBriefPage() {
           Tell me about your project.
         </h1>
         <p className="text-muted mt-3 max-w-xl" style={{ fontSize: 16, lineHeight: 1.7 }}>
-          Fill in as much or as little as you like — every answer helps me give you a more accurate proposal.
+          Fill in as much or as little as you like. Every answer helps me give you a more accurate proposal.
           Skip anything you're unsure about and we can cover it in our first call.
         </p>
         <div
           className="mt-5 rounded-xl px-5 py-4 flex items-start gap-3"
-          style={{ background: '#D9F5F2', border: '1px solid #A7E8E2' }}
+          style={{ background: '#003D52', border: '1px solid #0080A0' }}
         >
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" className="flex-shrink-0 mt-0.5" stroke="#05AD98" strokeWidth="2" strokeLinecap="round">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" className="flex-shrink-0 mt-0.5" stroke="#00C8FF" strokeWidth="2" strokeLinecap="round">
             <circle cx="9" cy="9" r="7" />
             <line x1="9" y1="6" x2="9" y2="6.01" />
             <line x1="9" y1="9" x2="9" y2="13" />
           </svg>
-          <p className="text-sm" style={{ color: '#076B5F', lineHeight: 1.6 }}>
+          <p className="text-sm" style={{ color: '#7BB8D0', lineHeight: 1.6 }}>
             If you have a logo, existing brand assets, or inspiration images, email them to{' '}
             <a href="mailto:hello@coylabs.dev" className="underline font-medium">hello@coylabs.dev</a>{' '}
             alongside this form.
@@ -322,7 +322,7 @@ export default function ClientBriefPage() {
               <TextInput value={form.brandWords} onChange={set('brandWords')} placeholder="e.g. warm, trustworthy, premium, local, playful" />
             </Q>
             <Q label="Do you have an existing logo?">
-              <Chips options={["Yes — I'll email it", 'No — I need one designed', 'Logo is in progress']} value={form.hasLogo} onChange={setVal('hasLogo')} />
+              <Chips options={["Yes, I'll email it", 'No, I need one designed', 'Logo is in progress']} value={form.hasLogo} onChange={setVal('hasLogo')} />
             </Q>
             <Q label="Do you have established brand colours?" hint="hex codes, Pantone, or a description">
               <TextInput value={form.brandColours} onChange={set('brandColours')} placeholder="e.g. #2D4A8A and #F5A623, or 'deep navy and warm gold'" />
@@ -331,7 +331,7 @@ export default function ClientBriefPage() {
               <TextInput value={form.fontStyle} onChange={set('fontStyle')} placeholder="e.g. clean sans-serif, classic serif, I'm open to suggestions" />
             </Q>
             <Q label="Do you have brand guidelines or a style guide?">
-              <Chips options={["Yes — I'll email it", 'Partial / in progress', 'No']} value={form.hasBrandGuidelines} onChange={setVal('hasBrandGuidelines')} />
+              <Chips options={["Yes, I'll email it", 'Partial / in progress', 'No']} value={form.hasBrandGuidelines} onChange={setVal('hasBrandGuidelines')} />
             </Q>
           </Section>
 
@@ -406,16 +406,16 @@ export default function ClientBriefPage() {
                 onChange={setVal('pagesNeeded')}
               />
             </Q>
-            <Q label="Written content (copy) — where are you?">
+            <Q label="Written content (copy): where are you?">
               <Chips
-                options={['All written and ready', 'Some ready, rest is placeholder', "Nothing yet — I need help writing it", "I'd like you to write everything"]}
+                options={['All written and ready', 'Some ready, rest is placeholder', "Nothing yet, I need help writing it", "I'd like you to write everything"]}
                 value={form.contentReady}
                 onChange={setVal('contentReady')}
               />
             </Q>
             <Q label="Do you have photography or images?">
               <Chips
-                options={['Yes — professional photography', 'Yes — my own photos', 'No — use stock imagery', 'Mix of mine and stock']}
+                options={['Yes, professional photography', 'Yes, my own photos', 'No, use stock imagery', 'Mix of mine and stock']}
                 value={form.hasPhotography}
                 onChange={setVal('hasPhotography')}
               />
@@ -437,7 +437,7 @@ export default function ClientBriefPage() {
           <Section
             number="5"
             title="Functionality & Features"
-            description="This is where scope (and budget) can grow — be specific about what you actually need."
+            description="Be as specific as you can about what you actually need. It helps me understand the size of the job."
           >
             <Q label="Do you need an online shop / e-commerce?">
               <Chips options={['Yes', 'No', 'Not sure']} value={form.needsEcommerce} onChange={setVal('needsEcommerce')} />
@@ -451,7 +451,7 @@ export default function ClientBriefPage() {
               <Chips options={['Yes', 'No']} value={form.needsBooking} onChange={setVal('needsBooking')} />
             </Q>
             <Q label="Do you need a contact form?" hint="what information should it collect?">
-              <TextArea rows={2} value={form.contactFormDetails} onChange={set('contactFormDetails')} placeholder="e.g. Yes — name, email, phone, and a message. Or: No, just show our phone number." />
+              <TextArea rows={2} value={form.contactFormDetails} onChange={set('contactFormDetails')} placeholder="e.g. Yes: name, email, phone, and a message. Or: No, just show our phone number." />
             </Q>
             <Q label="Do you need user accounts or a login area?">
               <Chips options={['Yes', 'No', 'Not sure']} value={form.needsLogin} onChange={setVal('needsLogin')} />
@@ -485,11 +485,11 @@ export default function ClientBriefPage() {
                 rows={4}
                 value={form.sitesILike}
                 onChange={set('sitesILike')}
-                placeholder={'e.g.\nhttps://example.com — love the clean layout and bold typography\nhttps://example2.com — the photography and dark theme are exactly our vibe'}
+                placeholder={'e.g.\nhttps://example.com: love the clean layout and bold typography\nhttps://example2.com: the photography and dark theme are exactly our vibe'}
               />
             </Q>
             <Q label="Any websites you dislike, and why?">
-              <TextArea rows={2} value={form.sitesIDislike} onChange={set('sitesIDislike')} placeholder="e.g. https://example.com — too cluttered, too many animations, looks cheap" />
+              <TextArea rows={2} value={form.sitesIDislike} onChange={set('sitesIDislike')} placeholder="e.g. https://example.com: too cluttered, too many animations, looks cheap" />
             </Q>
             <Q label="What feeling should the design convey?">
               <Chips
@@ -502,7 +502,7 @@ export default function ClientBriefPage() {
               <TextInput value={form.stylesToAvoid} onChange={set('stylesToAvoid')} placeholder="e.g. no dark backgrounds, avoid anything too trendy, no stock-photo-heavy layouts" />
             </Q>
             <Q label="Preferred image style">
-              <Chips options={['Real photography', 'Illustration', 'Icons & graphics', 'Mix of photography + illustration', 'Minimal — few images']} value={form.imageStyle} onChange={setVal('imageStyle')} />
+              <Chips options={['Real photography', 'Illustration', 'Icons & graphics', 'Mix of photography + illustration', 'Minimal, few images']} value={form.imageStyle} onChange={setVal('imageStyle')} />
             </Q>
           </Section>
 
@@ -515,10 +515,10 @@ export default function ClientBriefPage() {
             description="The boring stuff that affects how we build, host, and hand over the site."
           >
             <Q label="Do you have a domain name?" hint="e.g. yourbusiness.ie">
-              <TextInput value={form.domainName} onChange={set('domainName')} placeholder="e.g. murphysbakery.ie, or 'No — I need one'" />
+              <TextInput value={form.domainName} onChange={set('domainName')} placeholder="e.g. murphysbakery.ie, or 'No, I need one'" />
             </Q>
             <Q label="Domain status">
-              <Chips options={['Already registered — I own it', 'Registered but with old host', 'I need to buy one', 'Not sure']} value={form.domainStatus} onChange={setVal('domainStatus')} />
+              <Chips options={['Already registered, I own it', 'Registered but with old host', 'I need to buy one', 'Not sure']} value={form.domainStatus} onChange={setVal('domainStatus')} />
             </Q>
             <Q label="Do you have existing hosting?" hint="provider name if yes">
               <TextInput value={form.existingHosting} onChange={set('existingHosting')} placeholder="e.g. SiteGround, cPanel, WordPress.com, or 'No'" />
@@ -534,7 +534,7 @@ export default function ClientBriefPage() {
             </Q>
             <Q label="Will you need to update content yourself after launch?">
               <Chips
-                options={['Yes — I need a CMS (e.g. to edit blog posts, update text)', 'No — Coylabs handles updates', 'Not sure yet']}
+                options={['Yes, I need a CMS (e.g. to edit blog posts, update text)', 'No, Coylabs handles updates', 'Not sure yet']}
                 value={form.needsCMS}
                 onChange={setVal('needsCMS')}
               />
@@ -553,7 +553,7 @@ export default function ClientBriefPage() {
               <TextArea rows={2} value={form.targetKeywords} onChange={set('targetKeywords')} placeholder="e.g. 'Dublin wedding photographer', 'accountant Cork', 'buy handmade candles Ireland'" />
             </Q>
             <Q label="Do you have Google Analytics or any tracking set up?">
-              <Chips options={['Yes — existing GA4', 'No — please set it up', 'No — not needed']} value={form.hasAnalytics} onChange={setVal('hasAnalytics')} />
+              <Chips options={['Yes, existing GA4', 'No, please set it up', 'No, not needed']} value={form.hasAnalytics} onChange={setVal('hasAnalytics')} />
             </Q>
             <Q label="Are you running (or planning to run) paid ads?">
               <Chips options={['Google Ads', 'Meta / Facebook Ads', 'Both', 'Planning to', 'No']} value={form.runningAds} onChange={setVal('runningAds')} />
@@ -578,25 +578,18 @@ export default function ClientBriefPage() {
           {/* Section 9 */}
           <Section
             number="9"
-            title="Timeline & Budget"
-            description="Realistic on both sides — no surprises."
+            title="Timeline & Support"
+            description="Realistic on both sides, no surprises."
           >
             <Q label="When do you need the site live?">
               <TextInput value={form.goLiveDate} onChange={set('goLiveDate')} placeholder="e.g. end of August, before Christmas, ASAP, no fixed date" />
             </Q>
             <Q label="Is that deadline…">
-              <Chips options={["Hard — can't move it", 'Flexible', 'No fixed deadline']} value={form.deadlineType} onChange={setVal('deadlineType')} />
-            </Q>
-            <Q label="Budget range">
-              <Chips
-                options={['Under €1,000', '€1,000–€2,500', '€2,500–€5,000', '€5,000–€10,000', '€10,000+']}
-                value={form.budget}
-                onChange={setVal('budget')}
-              />
+              <Chips options={["Hard, can't move it", 'Flexible', 'No fixed deadline']} value={form.deadlineType} onChange={setVal('deadlineType')} />
             </Q>
             <Q label="Will you need ongoing support or maintenance after launch?">
               <Chips
-                options={['Yes — full monthly retainer', 'Yes — occasional updates as needed', "No — once it's live, I'll manage it", 'Not sure yet']}
+                options={['Yes, full monthly retainer', 'Yes, occasional updates as needed', "No, once it's live I'll manage it", 'Not sure yet']}
                 value={form.maintenanceNeeded}
                 onChange={setVal('maintenanceNeeded')}
               />
@@ -615,10 +608,10 @@ export default function ClientBriefPage() {
             description="Knowing how you work helps me structure the project to fit your life."
           >
             <Q label="Who is the main point of contact for this project?">
-              <TextInput value={form.mainContact} onChange={set('mainContact')} placeholder="Name and role, e.g. Jane Murphy — Owner" />
+              <TextInput value={form.mainContact} onChange={set('mainContact')} placeholder="Name and role, e.g. Jane Murphy, Owner" />
             </Q>
             <Q label="Who has final sign-off on design and content?" hint="if different from above">
-              <TextInput value={form.approvalContact} onChange={set('approvalContact')} placeholder="e.g. Same as above, or: John Smith — Marketing Manager" />
+              <TextInput value={form.approvalContact} onChange={set('approvalContact')} placeholder="e.g. Same as above, or: John Smith, Marketing Manager" />
             </Q>
             <Q label="How do you prefer to communicate?" hint="select all that apply">
               <Chips
@@ -652,7 +645,7 @@ export default function ClientBriefPage() {
             </button>
             {submitError && (
               <p className="mt-4 text-sm" style={{ color: '#DC2626' }}>
-                Something went wrong — please email{' '}
+                Something went wrong. Please email{' '}
                 <a href="mailto:hello@coylabs.dev" className="underline">hello@coylabs.dev</a> directly.
               </p>
             )}

@@ -1,4 +1,5 @@
-import work from '../content/work'
+import { useEffect, useState } from 'react'
+import fallbackWork from '../content/work'
 
 function TagPill({ label }) {
   return (
@@ -58,6 +59,19 @@ function RealCard({ title, description, tags, href, note }) {
 
 
 export default function Work() {
+  // Show the built-in cards straight away, then swap in the live ones from
+  // the admin panel. If the database is empty or unreachable, keep the built-in ones.
+  const [work, setWork] = useState(fallbackWork)
+
+  useEffect(() => {
+    let cancelled = false
+    import('../lib/workStore')
+      .then((m) => m.fetchWork())
+      .then((items) => { if (!cancelled && items.length) setWork(items) })
+      .catch(() => {})
+    return () => { cancelled = true }
+  }, [])
+
   return (
     <section id="work" className="py-20 px-6">
       <div className="max-w-5xl mx-auto">
@@ -79,7 +93,7 @@ export default function Work() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
           {work.filter((card) => !card.hidden).map((card) => (
-            <RealCard key={card.title} {...card} />
+            <RealCard key={card.id || card.title} {...card} />
           ))}
         </div>
 

@@ -78,3 +78,10 @@ Set domain to coylabs.dev in the Vercel project settings.
 
 ## Contact
 hello@coylabs.dev
+
+## Admin panel (/admin)
+- Google sign-in, only rosscoy95@gmail.com is allowed (checked in AuthContext and enforced in firestore.rules)
+- Firebase project: coylabs-dev. Firestore collection `work` holds Recent Work cards (title, description, tags, href, note, hidden, order)
+- Public Work section shows src/content/work.js first, then swaps in Firestore items if any exist
+- Admin page and Firebase Auth are lazy-loaded so they don't weigh down the public page
+- Deploy rule changes with: firebase deploy --only firestore:rules

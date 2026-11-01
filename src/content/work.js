@@ -1,4 +1,9 @@
-// RECENT WORK
+// RECENT WORK (built-in defaults)
+// ------------------------------------------------------------------
+// The live cards are now managed at coylabs.dev/admin. This file is only
+// used if the admin database is empty or can't be reached, and as the
+// source for the "Import built-in cards" button in the admin panel.
+//
 // ------------------------------------------------------------------
 // Each item in the list below is one card in the "Recent Work" section.
 // Cards show on the site in the same order they appear here.

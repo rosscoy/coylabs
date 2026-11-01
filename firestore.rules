@@ -1,0 +1,25 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isAdmin() {
+      return request.auth != null
+        && request.auth.token.email == 'rosscoy95@gmail.com'
+        && request.auth.token.email_verified == true;
+    }
+
+    // Recent Work cards: anyone can read, only Ross can change them
+    match /work/{id} {
+      allow read: if true;
+      allow write: if isAdmin()
+        && request.resource.data.title is string
+        && request.resource.data.title.size() > 0
+        && request.resource.data.href is string
+        && request.resource.data.order is number;
+      allow delete: if isAdmin();
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

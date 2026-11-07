@@ -43,7 +43,7 @@ export default function Nav() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-surface border-b border-border">
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-        <a href="#home" className="flex items-center">
+        <a href="#home" className="flex items-center" aria-label="Coylabs Development, back to top">
           <Logo />
         </a>
 
@@ -70,7 +70,9 @@ export default function Nav() {
         <button
           className="md:hidden flex flex-col gap-1.5 p-2"
           onClick={() => setOpen(!open)}
-          aria-label="Toggle menu"
+          aria-label={open ? 'Close menu' : 'Open menu'}
+          aria-expanded={open}
+          aria-controls="mobile-menu"
         >
           <span className="block w-5 h-0.5 bg-ink" />
           <span className="block w-5 h-0.5 bg-ink" />
@@ -80,7 +82,7 @@ export default function Nav() {
 
       {/* Mobile dropdown */}
       {open && (
-        <div className="md:hidden bg-surface border-b border-border px-6 py-4 flex flex-col gap-0">
+        <div id="mobile-menu" className="md:hidden bg-surface border-b border-border px-6 py-4 flex flex-col gap-0">
           {links.map((l) => (
             <a
               key={l.href}

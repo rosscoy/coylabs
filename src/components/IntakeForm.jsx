@@ -1,24 +1,24 @@
 import { useState } from 'react'
 import Chip from './Chip'
 
-const FORMSPREE_URL = 'https://formspree.io/f/xwvwappg'
+import { CONTACT_EMAIL, FORMSPREE_URL } from '../config'
 
 const projectTypes = ['New website', 'Redesign', 'E-commerce', 'Landing page', 'Not sure yet']
 const timelines = ['ASAP', '1–2 weeks', '2–4 weeks', '4–8 weeks', 'No rush']
 const priorities = ['Looking great', 'Getting found on Google', 'More enquiries or bookings', 'Selling online', 'Easy to update myself', 'Not sure yet']
 
-function Label({ children, required }) {
+function Label({ children, required, htmlFor }) {
   return (
-    <label className="block text-sm font-medium text-ink mb-1.5">
+    <label htmlFor={htmlFor} className="block text-sm font-medium text-ink mb-1.5">
       {children}
       {required && <span style={{ color: '#FF6B6B' }} className="ml-0.5">*</span>}
     </label>
   )
 }
 
-function FieldError({ msg }) {
+function FieldError({ id, msg }) {
   if (!msg) return null
-  return <p className="mt-1 text-sm" style={{ color: '#DC2626' }}>{msg}</p>
+  return <p id={id} role="alert" className="mt-1 text-sm" style={{ color: '#FF6B6B' }}>{msg}</p>
 }
 
 function SuccessCard({ name }) {
@@ -39,8 +39,8 @@ function SuccessCard({ name }) {
       </p>
       <p className="text-muted mt-2" style={{ fontSize: 13 }}>
         Or email me directly at{' '}
-        <a href="mailto:hello@coylabs.dev" className="text-accent hover:underline">
-          hello@coylabs.dev
+        <a href={`mailto:${CONTACT_EMAIL}`} className="text-accent hover:underline">
+          {CONTACT_EMAIL}
         </a>
       </p>
     </div>
@@ -51,6 +51,7 @@ export default function IntakeForm() {
   const [form, setForm] = useState({
     name: '', email: '', phone: '',
     projectType: '', timeline: '', priorities: [], description: '',
+    _gotcha: '', // spam trap: real people never see or fill this
   })
   const [errors, setErrors] = useState({})
   const [submitted, setSubmitted] = useState(false)
@@ -100,21 +101,24 @@ export default function IntakeForm() {
   return (
     <form onSubmit={handleSubmit} noValidate className="space-y-6">
 
+      {/* Spam trap, hidden from people. Formspree discards anything that fills it in. */}
+      <input type="text" name="_gotcha" value={form._gotcha} onChange={set('_gotcha')} tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
+
       {/* Contact */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
-          <Label required>Your name</Label>
-          <input type="text" value={form.name} onChange={set('name')} placeholder="Jane Murphy" className={inputCls('name')} />
-          <FieldError msg={errors.name} />
+          <Label required htmlFor="contact-name">Your name</Label>
+          <input id="contact-name" type="text" autoComplete="name" aria-invalid={!!errors.name} aria-describedby={errors.name ? "contact-name-error" : undefined} value={form.name} onChange={set('name')} placeholder="Jane Murphy" className={inputCls('name')} />
+          <FieldError id="contact-name-error" msg={errors.name} />
         </div>
         <div>
-          <Label required>Email address</Label>
-          <input type="email" value={form.email} onChange={set('email')} placeholder="jane@example.com" className={inputCls('email')} />
-          <FieldError msg={errors.email} />
+          <Label required htmlFor="contact-email">Email address</Label>
+          <input id="contact-email" type="email" autoComplete="email" aria-invalid={!!errors.email} aria-describedby={errors.email ? "contact-email-error" : undefined} value={form.email} onChange={set('email')} placeholder="jane@example.com" className={inputCls('email')} />
+          <FieldError id="contact-email-error" msg={errors.email} />
         </div>
         <div className="sm:col-span-2">
-          <Label>Phone number <span className="text-muted font-normal" style={{ fontSize: 12 }}>(optional)</span></Label>
-          <input type="tel" value={form.phone} onChange={set('phone')} placeholder="+353 87 000 0000" className={inputCls('phone')} />
+          <Label htmlFor="contact-phone">Phone number <span className="text-muted font-normal" style={{ fontSize: 12 }}>(optional)</span></Label>
+          <input id="contact-phone" type="tel" autoComplete="tel" value={form.phone} onChange={set('phone')} placeholder="+353 87 000 0000" className={inputCls('phone')} />
         </div>
       </div>
 
@@ -154,8 +158,9 @@ export default function IntakeForm() {
 
       {/* Description */}
       <div>
-        <Label>Tell me what you're after</Label>
+        <Label htmlFor="contact-description">Tell me what you're after</Label>
         <textarea
+          id="contact-description"
           rows={3}
           value={form.description}
           onChange={set('description')}
@@ -167,15 +172,15 @@ export default function IntakeForm() {
       <button
         type="submit"
         disabled={submitting}
-        className="bg-accent hover:bg-accent-hover text-white font-semibold rounded-lg px-6 py-2.5 text-sm transition-colors w-full sm:w-auto disabled:opacity-60"
+        className="bg-accent hover:bg-accent-hover text-warm font-semibold rounded-lg px-6 py-2.5 text-sm transition-colors w-full sm:w-auto disabled:opacity-60"
       >
         {submitting ? 'Sending…' : 'Send my enquiry →'}
       </button>
 
       {submitError && (
-        <p className="mt-2 text-sm" style={{ color: '#DC2626' }}>
+        <p className="mt-2 text-sm" style={{ color: '#FF6B6B' }}>
           Something went wrong. Please email{' '}
-          <a href="mailto:hello@coylabs.dev" className="underline">hello@coylabs.dev</a> directly.
+          <a href={`mailto:${CONTACT_EMAIL}`} className="underline">{CONTACT_EMAIL}</a> directly.
         </p>
       )}
     </form>

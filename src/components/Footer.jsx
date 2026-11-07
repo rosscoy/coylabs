@@ -1,4 +1,5 @@
 import { Logo } from './Nav'
+import { CONTACT_EMAIL } from '../config'
 
 const links = [
   { label: 'Work', href: '#work' },
@@ -41,16 +42,16 @@ export default function Footer() {
           style={{ borderTop: '1px solid #152233' }}
         >
           <p style={{ fontSize: 13, color: '#7895A8' }}>
-            © 2026 Coylabs Development · Dublin, Ireland
+            © {new Date().getFullYear()} Coylabs Development · Dublin, Ireland
           </p>
           <a
-            href="mailto:hello@coylabs.dev"
+            href={`mailto:${CONTACT_EMAIL}`}
             className="transition-colors"
             style={{ fontSize: 13, color: '#7895A8' }}
             onMouseEnter={e => { e.currentTarget.style.color = '#E8F4FF' }}
             onMouseLeave={e => { e.currentTarget.style.color = '#7895A8' }}
           >
-            hello@coylabs.dev
+            {CONTACT_EMAIL}
           </a>
         </div>
       </div>

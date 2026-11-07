@@ -31,7 +31,7 @@ const work = [
     description:
       'Portfolio and services website for Dublin-based creative director Adam Browne. Clean, image-led design built to showcase his work and attract new clients.',
     tags: ['React', 'Vercel'],
-    href: 'https://adambrowne.creative',
+    href: 'https://www.adambrownecreative.com/',
     note: null,
   },
   {

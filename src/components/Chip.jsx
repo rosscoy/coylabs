@@ -2,6 +2,7 @@ export default function Chip({ label, active, onClick }) {
   return (
     <button
       type="button"
+      aria-pressed={!!active}
       onClick={onClick}
       className="transition-all duration-150 font-medium"
       style={{

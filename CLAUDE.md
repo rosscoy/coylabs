@@ -8,7 +8,7 @@ Single-page React app, deployed to Vercel at www.coylabsdevelopment.com.
 ## Stack
 - React 18 + Vite
 - Tailwind CSS v3 (semantic brand tokens — see tailwind.config.js)
-- Formspree for the intake form (replace REPLACE_WITH_YOUR_ID in IntakeForm.jsx)
+- Formspree for the intake form (endpoint in src/config.js)
 - Deployed via Vercel (vercel.json SPA rewrite included)
 
 ## Brand
@@ -78,7 +78,7 @@ Push to GitHub and connect to Vercel. The vercel.json handles SPA routing.
 Live domain: www.coylabsdevelopment.com (apex redirects to www). Also coylabs.vercel.app. coylabs.dev is NOT attached to the Vercel project.
 
 ## Contact
-hello@coylabs.dev
+hello@coylabsdevelopment.com (Cloudflare Email Routing on coylabsdevelopment.com; set in src/config.js). coylabs.dev is not a registered domain, never use it.
 
 ## Admin panel (/admin)
 - Google sign-in, only rosscoy95@gmail.com is allowed (checked in AuthContext and enforced in firestore.rules)

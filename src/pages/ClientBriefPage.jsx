@@ -1,8 +1,12 @@
-import { useState } from 'react'
+import { createContext, useContext, useEffect, useId, useState } from 'react'
 import Chip from '../components/Chip'
 import { Logo } from '../components/Nav'
 
-const FORMSPREE_URL = 'https://formspree.io/f/xwvwappg'
+import { CONTACT_EMAIL, FORMSPREE_URL } from '../config'
+
+// Lets each question's label point at its own input, so clicking the label
+// focuses the field and screen readers announce the question.
+const FieldId = createContext(undefined)
 
 const init = {
   name: '', email: '', phone: '', bizName: '',
@@ -26,11 +30,12 @@ const init = {
   maintenanceNeeded: '', futurePhases: '',
   mainContact: '', approvalContact: '', preferredComms: [],
   updateFrequency: '', contentManager: '',
+  _gotcha: '', // spam trap: real people never see or fill this
 }
 
-function Label({ children, required, hint }) {
+function Label({ children, required, hint, htmlFor, id }) {
   return (
-    <label className="block text-sm font-medium text-ink mb-1.5">
+    <label id={id} htmlFor={htmlFor} className="block text-sm font-medium text-ink mb-1.5">
       {children}
       {required && <span style={{ color: '#FF6B6B' }} className="ml-0.5">*</span>}
       {hint && <span className="text-muted font-normal ml-2" style={{ fontSize: 12 }}>{hint}</span>}
@@ -39,8 +44,10 @@ function Label({ children, required, hint }) {
 }
 
 function TextInput({ value, onChange, placeholder, type = 'text' }) {
+  const id = useContext(FieldId)
   return (
     <input
+      id={id}
       type={type}
       value={value}
       onChange={onChange}
@@ -51,8 +58,10 @@ function TextInput({ value, onChange, placeholder, type = 'text' }) {
 }
 
 function TextArea({ value, onChange, placeholder, rows = 3 }) {
+  const id = useContext(FieldId)
   return (
     <textarea
+      id={id}
       rows={rows}
       value={value}
       onChange={onChange}
@@ -72,8 +81,9 @@ function Chips({ options, value, onChange, multi = false }) {
     }
   }
   const isActive = (opt) => multi ? (Array.isArray(value) && value.includes(opt)) : value === opt
+  const id = useContext(FieldId)
   return (
-    <div className="flex flex-wrap gap-2 mt-1">
+    <div role="group" aria-labelledby={id ? `${id}-label` : undefined} className="flex flex-wrap gap-2 mt-1">
       {options.map(opt => (
         <Chip key={opt} label={opt} active={isActive(opt)} onClick={() => toggle(opt)} />
       ))}
@@ -82,11 +92,14 @@ function Chips({ options, value, onChange, multi = false }) {
 }
 
 function Q({ label, required, hint, children }) {
+  const id = useId()
   return (
-    <div>
-      <Label required={required} hint={hint}>{label}</Label>
-      {children}
-    </div>
+    <FieldId.Provider value={id}>
+      <div>
+        <Label id={`${id}-label`} htmlFor={id} required={required} hint={hint}>{label}</Label>
+        {children}
+      </div>
+    </FieldId.Provider>
   )
 }
 
@@ -135,13 +148,13 @@ function SuccessCard({ name }) {
         </p>
         <p className="text-muted mt-3" style={{ fontSize: 13 }}>
           Questions in the meantime?{' '}
-          <a href="mailto:hello@coylabs.dev" className="text-accent hover:underline">
-            hello@coylabs.dev
+          <a href={`mailto:${CONTACT_EMAIL}`} className="text-accent hover:underline">
+            {CONTACT_EMAIL}
           </a>
         </p>
         <a
           href="/"
-          className="mt-6 inline-block bg-accent hover:bg-accent-hover text-white text-sm font-semibold px-6 py-2.5 rounded-lg transition-colors"
+          className="mt-6 inline-block bg-accent hover:bg-accent-hover text-warm text-sm font-semibold px-6 py-2.5 rounded-lg transition-colors"
         >
           Back to Coylabs →
         </a>
@@ -159,6 +172,10 @@ export default function ClientBriefPage() {
 
   const set = (key) => (e) => setForm(f => ({ ...f, [key]: e.target.value }))
   const setVal = (key) => (val) => setForm(f => ({ ...f, [key]: val }))
+
+  useEffect(() => {
+    document.title = 'Project Brief | Coylabs Development'
+  }, [])
 
   const validate = () => {
     const e = {}
@@ -241,7 +258,7 @@ export default function ClientBriefPage() {
           </svg>
           <p className="text-sm" style={{ color: '#7BB8D0', lineHeight: 1.6 }}>
             If you have a logo, existing brand assets, or inspiration images, email them to{' '}
-            <a href="mailto:hello@coylabs.dev" className="underline font-medium">hello@coylabs.dev</a>{' '}
+            <a href={`mailto:${CONTACT_EMAIL}`} className="underline font-medium">{CONTACT_EMAIL}</a>{' '}
             alongside this form.
           </p>
         </div>
@@ -249,6 +266,8 @@ export default function ClientBriefPage() {
 
       {/* Form */}
       <form onSubmit={handleSubmit} noValidate>
+        {/* Spam trap, hidden from people. Formspree discards anything that fills it in. */}
+        <input type="text" name="_gotcha" value={form._gotcha} onChange={set('_gotcha')} tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
         <div className="max-w-3xl mx-auto px-6 pb-16 space-y-6">
 
           {/* Contact Info */}
@@ -256,41 +275,52 @@ export default function ClientBriefPage() {
             <h2 className="text-lg font-bold text-ink mb-6">Your details</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div>
-                <Label required>Full name</Label>
+                <Label required htmlFor="brief-name">Full name</Label>
                 <input
                   type="text"
+                  id="brief-name"
+                  autoComplete="name"
+                  aria-invalid={!!errors.name}
                   value={form.name}
                   onChange={set('name')}
                   placeholder="Jane Murphy"
                   className={inputClass('name')}
                 />
-                {errors.name && <p className="mt-1 text-xs" style={{ color: '#DC2626' }}>Please enter your name.</p>}
+                {errors.name && <p className="mt-1 text-xs" role="alert" style={{ color: '#FF6B6B' }}>Please enter your name.</p>}
               </div>
               <div>
-                <Label required>Email address</Label>
+                <Label required htmlFor="brief-email">Email address</Label>
                 <input
                   type="email"
+                  id="brief-email"
+                  autoComplete="email"
+                  aria-invalid={!!errors.email}
                   value={form.email}
                   onChange={set('email')}
                   placeholder="jane@example.com"
                   className={inputClass('email')}
                 />
-                {errors.email && <p className="mt-1 text-xs" style={{ color: '#DC2626' }}>Please enter a valid email.</p>}
+                {errors.email && <p className="mt-1 text-xs" role="alert" style={{ color: '#FF6B6B' }}>Please enter a valid email.</p>}
               </div>
               <div>
-                <Label>Phone number</Label>
-                <TextInput value={form.phone} onChange={set('phone')} placeholder="+353 87 000 0000" />
+                <Label htmlFor="brief-phone">Phone number</Label>
+                <FieldId.Provider value="brief-phone">
+                  <TextInput type="tel" value={form.phone} onChange={set('phone')} placeholder="+353 87 000 0000" />
+                </FieldId.Provider>
               </div>
               <div>
-                <Label required>Business / brand name</Label>
+                <Label required htmlFor="brief-bizName">Business / brand name</Label>
                 <input
                   type="text"
+                  id="brief-bizName"
+                  autoComplete="organization"
+                  aria-invalid={!!errors.bizName}
                   value={form.bizName}
                   onChange={set('bizName')}
                   placeholder="Murphy's Bakery"
                   className={inputClass('bizName')}
                 />
-                {errors.bizName && <p className="mt-1 text-xs" style={{ color: '#DC2626' }}>Please enter your business name.</p>}
+                {errors.bizName && <p className="mt-1 text-xs" role="alert" style={{ color: '#FF6B6B' }}>Please enter your business name.</p>}
               </div>
             </div>
           </div>
@@ -639,18 +669,18 @@ export default function ClientBriefPage() {
             <button
               type="submit"
               disabled={submitting}
-              className="bg-accent hover:bg-accent-hover text-white font-semibold rounded-lg px-8 py-3 text-sm transition-colors disabled:opacity-60"
+              className="bg-accent hover:bg-accent-hover text-warm font-semibold rounded-lg px-8 py-3 text-sm transition-colors disabled:opacity-60"
             >
               {submitting ? 'Sending…' : 'Submit my project brief →'}
             </button>
             {submitError && (
-              <p className="mt-4 text-sm" style={{ color: '#DC2626' }}>
+              <p className="mt-4 text-sm" role="alert" style={{ color: '#FF6B6B' }}>
                 Something went wrong. Please email{' '}
-                <a href="mailto:hello@coylabs.dev" className="underline">hello@coylabs.dev</a> directly.
+                <a href={`mailto:${CONTACT_EMAIL}`} className="underline">{CONTACT_EMAIL}</a> directly.
               </p>
             )}
             {Object.keys(errors).length > 0 && (
-              <p className="mt-4 text-sm" style={{ color: '#DC2626' }}>
+              <p className="mt-4 text-sm" role="alert" style={{ color: '#FF6B6B' }}>
                 Please fill in your name, email, and business name before submitting.
               </p>
             )}

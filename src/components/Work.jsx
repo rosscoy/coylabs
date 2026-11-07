@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import fallbackWork from '../content/work'
+import { fetchPublicWork } from '../lib/publicWork'
 
 function TagPill({ label }) {
   return (
@@ -65,8 +66,7 @@ export default function Work() {
 
   useEffect(() => {
     let cancelled = false
-    import('../lib/workStore')
-      .then((m) => m.fetchWork())
+    fetchPublicWork()
       .then((items) => { if (!cancelled && items.length) setWork(items) })
       .catch(() => {})
     return () => { cancelled = true }

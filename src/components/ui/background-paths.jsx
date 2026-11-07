@@ -1,7 +1,10 @@
-import { motion, useReducedMotion } from "framer-motion";
+import { useEffect, useRef } from "react";
 
-// Built once at module load, so renders stay pure and every path keeps the
-// same speed between renders. Durations spread from 20s to 30s.
+// Animated background lines. A tiny animation loop (no library) updates each
+// line on every screen refresh: the visible stretch grows from 30% to the
+// full line while sliding along it and back, and the line fades
+// 0.3 -> 0.6 -> 0.3. Each line loops every 20-30s so they drift out of sync.
+
 function buildPaths(position) {
   return Array.from({ length: 36 }, (_, i) => ({
     id: i,
@@ -17,56 +20,81 @@ function buildPaths(position) {
   }));
 }
 
-const MotionPath = motion.path;
+const PATHS = [...buildPaths(1), ...buildPaths(-1)];
+const SPLIT = PATHS.length / 2;
 
-const PATHS = { 1: buildPaths(1), [-1]: buildPaths(-1) };
+// Where a line is at progress p (0 -> 1 through one loop).
+function frame(p) {
+  const tri = p < 0.5 ? p * 2 : 2 - p * 2; // 0 -> 1 -> 0
+  return { visible: 0.3 + 0.7 * p, offset: tri, opacity: 0.3 + 0.3 * tri };
+}
 
-function FloatingPaths({ position, still }) {
+function drawLine(el, len, p) {
+  const f = frame(p);
+  el.setAttribute("stroke-dasharray", `${f.visible * len} ${len}`);
+  el.setAttribute("stroke-dashoffset", `${-f.offset * len}`);
+  el.setAttribute("opacity", f.opacity);
+}
+
+function Svg({ paths, refs }) {
   return (
     <div className="absolute inset-0 pointer-events-none">
       <svg className="w-full h-full" viewBox="0 0 696 316" fill="none">
-        {PATHS[position].map((path) =>
-          still ? (
-            <path
-              key={path.id}
-              d={path.d}
-              stroke="#00C8FF"
-              strokeWidth={path.width}
-              strokeOpacity={(0.06 + path.id * 0.012) * 0.45}
-            />
-          ) : (
-            <MotionPath
-              key={path.id}
-              d={path.d}
-              stroke="#00C8FF"
-              strokeWidth={path.width}
-              strokeOpacity={0.06 + path.id * 0.012}
-              initial={{ pathLength: 0.3, opacity: 0.6 }}
-              animate={{
-                pathLength: 1,
-                opacity: [0.3, 0.6, 0.3],
-                pathOffset: [0, 1, 0],
-              }}
-              transition={{
-                duration: path.duration,
-                repeat: Infinity,
-                ease: "linear",
-              }}
-            />
-          )
-        )}
+        {paths.map((path, i) => (
+          <path
+            key={path.id}
+            ref={(el) => { refs.current[i] = el; }}
+            d={path.d}
+            stroke="#00C8FF"
+            strokeWidth={path.width}
+            strokeOpacity={0.06 + path.id * 0.012}
+            visibility="hidden"
+          />
+        ))}
       </svg>
     </div>
   );
 }
 
 export function BackgroundPaths() {
-  // Visitors who've asked their device to reduce motion get a still version.
-  const still = useReducedMotion();
+  const a = useRef([]);
+  const b = useRef([]);
+
+  useEffect(() => {
+    const els = [...a.current, ...b.current];
+    const lens = els.map((el) => el.getTotalLength());
+    const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    // Visitors who've asked their device to reduce motion get still lines.
+    if (still) {
+      els.forEach((el) => {
+        el.setAttribute("opacity", 0.45);
+        el.setAttribute("visibility", "visible");
+      });
+      return;
+    }
+
+    let raf;
+    const tick = (now) => {
+      els.forEach((el, i) => {
+        const dur = PATHS[i].duration * 1000;
+        drawLine(el, lens[i], (now % dur) / dur);
+      });
+      raf = requestAnimationFrame(tick);
+    };
+    // Draw the first frame straight away, then reveal and start looping.
+    els.forEach((el, i) => {
+      drawLine(el, lens[i], 0);
+      el.setAttribute("visibility", "visible");
+    });
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, []);
+
   return (
     <div className="fixed inset-0 overflow-hidden z-0 pointer-events-none" aria-hidden="true">
-      <FloatingPaths position={1} still={still} />
-      <FloatingPaths position={-1} still={still} />
+      <Svg paths={PATHS.slice(0, SPLIT)} refs={a} />
+      <Svg paths={PATHS.slice(SPLIT)} refs={b} />
     </div>
   );
 }

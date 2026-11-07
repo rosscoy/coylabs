@@ -144,7 +144,7 @@ function SuccessCard({ name }) {
         </div>
         <h2 className="text-2xl font-bold text-ink">Thanks, {name}!</h2>
         <p className="text-muted mt-3" style={{ lineHeight: 1.7 }}>
-          Your project brief has been received. Ross will review everything and be in touch shortly.
+          Your project brief has been received. I'll review everything and be in touch as soon as possible.
         </p>
         <p className="text-muted mt-3" style={{ fontSize: 13 }}>
           Questions in the meantime?{' '}
@@ -542,7 +542,7 @@ export default function ClientBriefPage() {
           <Section
             number="7"
             title="Technical Requirements"
-            description="The boring stuff that affects how we build, host, and hand over the site."
+            description="The boring stuff that affects how I build, host, and hand over the site."
           >
             <Q label="Do you have a domain name?" hint="e.g. yourbusiness.ie">
               <TextInput value={form.domainName} onChange={set('domainName')} placeholder="e.g. murphysbakery.ie, or 'No, I need one'" />
@@ -663,7 +663,7 @@ export default function ClientBriefPage() {
           <div className="bg-surface rounded-2xl border border-border p-6 md:p-8 text-center">
             <h3 className="font-bold text-ink text-lg mb-2">That's everything!</h3>
             <p className="text-muted text-sm mb-6" style={{ lineHeight: 1.6 }}>
-              Once you submit, Ross will review your brief and be in touch within 24 hours to
+              Once you submit, I'll review your brief and be in touch as soon as possible to
               discuss next steps and put together a proposal.
             </p>
             <button

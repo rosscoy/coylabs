@@ -56,7 +56,7 @@ export default function Services() {
           className="text-accent font-semibold uppercase"
           style={{ fontSize: 12, letterSpacing: '0.1em' }}
         >
-          WHAT WE BUILD
+          WHAT I BUILD
         </p>
         <h2
           className="font-bold text-ink mt-2"

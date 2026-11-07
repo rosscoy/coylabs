@@ -35,7 +35,7 @@ function SuccessCard({ name }) {
       </div>
       <h3 className="text-2xl font-bold text-ink">Thanks, {name}!</h3>
       <p className="text-muted mt-3" style={{ lineHeight: 1.6 }}>
-        Got it. I'll be in touch within 24 hours.
+        Got it. I'll be in touch as soon as possible.
       </p>
       <p className="text-muted mt-2" style={{ fontSize: 13 }}>
         Or email me directly at{' '}

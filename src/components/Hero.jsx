@@ -46,7 +46,7 @@ export default function Hero() {
           }}
         >
           Good websites don't come from briefs. They come from conversations.
-          We build your site, you build your business.
+          I build your site, you build your business.
         </p>
 
         {/* Buttons */}
@@ -59,7 +59,7 @@ export default function Hero() {
             className="bg-accent hover:bg-accent-hover text-warm font-semibold rounded-lg transition-colors"
             style={{ padding: '12px 24px' }}
           >
-            See our work →
+            See my work →
           </a>
           <a
             href="#quote"

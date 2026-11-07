@@ -88,7 +88,7 @@ export default function Work() {
           Built by Coylabs Development
         </h2>
         <p className="text-muted mt-2" style={{ fontSize: 16 }}>
-          A selection of sites and apps we've shipped.
+          A selection of sites and apps I've built.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">

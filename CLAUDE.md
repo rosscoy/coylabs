@@ -3,13 +3,13 @@
 ## What this is
 Production website for Ross Coy's freelance web development business.
 Live at www.coylabsdevelopment.com.
-Single-page React app, deployed to Vercel at www.coylabsdevelopment.com.
+Single-page React app, hosted on Cloudflare (Workers static assets) at www.coylabsdevelopment.com.
 
 ## Stack
 - React 18 + Vite
 - Tailwind CSS v3 (semantic brand tokens — see tailwind.config.js)
 - Formspree for the intake form (endpoint in src/config.js)
-- Deployed via Vercel (vercel.json SPA rewrite included)
+- Deployed via Cloudflare Workers Builds from GitHub (see Deployment)
 
 ## Brand
 - Business name: Coylabs
@@ -74,8 +74,13 @@ const FORMSPREE_URL = 'https://formspree.io/f/REPLACE_WITH_YOUR_ID'
 Formspree endpoint is live: https://formspree.io/f/xwvwappg
 
 ## Deployment
-Push to GitHub and connect to Vercel. The vercel.json handles SPA routing.
-Live domain: www.coylabsdevelopment.com (apex redirects to www). Also coylabs.vercel.app. coylabs.dev is NOT attached to the Vercel project.
+Hosted on Cloudflare Workers (static assets) since 2026-11-16, moved off Vercel because Vercel Hobby is non-commercial only.
+- Worker `coylabs` in Ross's Cloudflare account, connected to GitHub `rosscoy/coylabs`; every push to `master` builds and deploys automatically.
+- The `VITE_FIREBASE_*` values are set as **Build** variables in the Worker settings (Settings → Build → Variables and secrets), not runtime vars. Vite needs them at build time.
+- SPA routes (e.g. /admin) fall back to index.html automatically.
+- Live domain: www.coylabsdevelopment.com (apex redirects to www via a Cloudflare Redirect Rule). Test URL: coylabs.rosscoy95.workers.dev.
+- The domain is still *registered* at Vercel; DNS is on Cloudflare. vercel.json is a leftover until the Vercel project is deleted.
+- coylabs.dev is not a registered domain, never use it.
 
 ## Contact
 hello@coylabsdevelopment.com (Cloudflare Email Routing on coylabsdevelopment.com; set in src/config.js). coylabs.dev is not a registered domain, never use it.

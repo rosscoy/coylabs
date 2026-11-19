@@ -11,24 +11,21 @@ function Label({ children, required, htmlFor }) {
   return (
     <label htmlFor={htmlFor} className="block text-sm font-medium text-ink mb-1.5">
       {children}
-      {required && <span style={{ color: '#FF6B6B' }} className="ml-0.5">*</span>}
+      {required && <span className="ml-0.5 text-danger">*</span>}
     </label>
   )
 }
 
 function FieldError({ id, msg }) {
   if (!msg) return null
-  return <p id={id} role="alert" className="mt-1 text-sm" style={{ color: '#FF6B6B' }}>{msg}</p>
+  return <p id={id} role="alert" className="mt-1 text-sm text-danger">{msg}</p>
 }
 
 function SuccessCard({ name }) {
   return (
-    <div className="bg-surface rounded-xl p-10 text-center border border-border">
-      <div
-        className="mx-auto mb-5 flex items-center justify-center rounded-full"
-        style={{ width: 52, height: 52, background: '#003D52' }}
-      >
-        <svg width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="#00C8FF" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+    <div className="bg-surface rounded-card p-10 text-center border border-border shadow-card">
+      <div className="tick-badge mx-auto mb-5 flex items-center justify-center rounded-full w-[52px] h-[52px] bg-accent-tint">
+        <svg className="tick-draw text-accent" aria-hidden="true" width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
           <circle cx="13" cy="13" r="11" />
           <polyline points="8 13 11.5 16.5 18 10" />
         </svg>
@@ -178,7 +175,7 @@ export default function IntakeForm() {
       </button>
 
       {submitError && (
-        <p className="mt-2 text-sm" style={{ color: '#FF6B6B' }}>
+        <p className="mt-2 text-sm text-danger">
           Something went wrong. Please email{' '}
           <a href={`mailto:${CONTACT_EMAIL}`} className="underline">{CONTACT_EMAIL}</a> directly.
         </p>

@@ -1,9 +1,9 @@
+import Reveal from './Reveal'
+import SectionHeader from './SectionHeader'
+
 function DecorativeSVG() {
   return (
-    <div
-      className="w-full h-full flex items-center justify-center rounded-2xl"
-      style={{ background: '#172534', minHeight: 320 }}
-    >
+    <div className="w-full h-full min-h-[320px] flex items-center justify-center rounded-card bg-surface border border-border shadow-card">
       <svg
         width="240"
         height="200"
@@ -48,49 +48,40 @@ export default function About() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
           {/* Text column */}
           <div>
-            <p
-              className="text-accent font-semibold uppercase"
-              style={{ fontSize: 12, letterSpacing: '0.1em' }}
-            >
-              ABOUT
-            </p>
-            <h2
-              className="font-bold text-ink mt-2"
-              style={{ fontSize: 'clamp(28px, 4vw, 42px)' }}
-            >
-              A bit about me
-            </h2>
+            <SectionHeader eyebrow="About" title="A bit about me" />
 
-            <p className="text-muted mt-6" style={{ fontSize: 15, lineHeight: 1.7 }}>
-              I'm Ross Coy, a Dublin-based developer with a strong design eye.
-              I build websites and web apps for businesses that want something
-              better than a template, where the look is just as considered as
-              the code underneath it.
-            </p>
-            <p className="text-muted mt-4" style={{ fontSize: 15, lineHeight: 1.7 }}>
-              I started Coylabs Development because I kept seeing businesses paying agency
-              prices for sites that underdelivered on both design and performance.
-              You get senior-level craft, visually and technically, at a
-              freelancer's rate.
-            </p>
-
-            {/* Stats */}
-            <div className="flex gap-10 mt-8">
-              <div>
-                <p className="font-bold text-ink" style={{ fontSize: 28 }}>
-                  Dublin
-                </p>
-                <p className="text-muted" style={{ fontSize: 13 }}>
-                  based, available nationwide
-                </p>
+            <Reveal>
+              <p className="text-muted mt-6 text-base leading-[1.7]">
+                I'm Ross Coy, a Dublin-based developer with a strong design eye.
+                I build websites and web apps for businesses that want something
+                better than a template, where the look is just as considered as
+                the code underneath it.
+              </p>
+              <p className="text-muted mt-4 text-base leading-[1.7]">
+                I started Coylabs Development because I kept seeing businesses paying agency
+                prices for sites that underdelivered on both design and performance.
+                You get senior-level craft, visually and technically, at a
+                freelancer's rate.
+              </p>
+  
+              {/* Stats */}
+              <div className="flex gap-10 mt-8">
+                <div>
+                  <p className="font-bold text-ink text-[28px] tracking-[-0.02em]">
+                    Dublin
+                  </p>
+                  <p className="text-muted text-[13px]">
+                    based, available nationwide
+                  </p>
+                </div>
               </div>
-            </div>
+            </Reveal>
           </div>
 
           {/* Decorative graphic */}
-          <div className="hidden md:block">
+          <Reveal className="hidden md:block">
             <DecorativeSVG />
-          </div>
+          </Reveal>
         </div>
       </div>
     </section>

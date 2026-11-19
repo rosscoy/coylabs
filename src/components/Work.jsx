@@ -1,18 +1,11 @@
 import { useEffect, useState } from 'react'
 import fallbackWork from '../content/work'
+import Reveal from './Reveal'
+import SectionHeader from './SectionHeader'
 
 function TagPill({ label }) {
   return (
-    <span
-      className="text-muted font-medium"
-      style={{
-        background: '#1A2D40',
-        border: '1px solid #223344',
-        borderRadius: 999,
-        padding: '3px 10px',
-        fontSize: 11,
-      }}
-    >
+    <span className="text-muted font-medium bg-warm border border-border rounded-full px-2.5 py-0.5 text-xs">
       {label}
     </span>
   )
@@ -20,12 +13,9 @@ function TagPill({ label }) {
 
 function RealCard({ title, description, tags, href, note }) {
   return (
-    <div
-      className="bg-surface rounded-xl p-6 border border-border transition-colors duration-200 hover:border-accent flex flex-col"
-      style={{ borderRadius: 12 }}
-    >
+    <div className="group h-full bg-surface rounded-card p-6 border border-border shadow-card flex flex-col transition-[transform,box-shadow,border-color] duration-base hover:-translate-y-1 hover:shadow-card-hover hover:border-accent/40">
       <div className="flex items-start justify-between gap-3 flex-wrap">
-        <h3 className="font-bold text-ink" style={{ fontSize: 18 }}>
+        <h3 className="font-bold text-ink text-lg">
           {title}
         </h3>
         <div className="flex flex-wrap gap-1.5">
@@ -34,7 +24,7 @@ function RealCard({ title, description, tags, href, note }) {
           ))}
         </div>
       </div>
-      <p className="text-muted mt-2.5 flex-1" style={{ fontSize: 14, lineHeight: 1.6 }}>
+      <p className="text-muted mt-2.5 flex-1 text-base leading-relaxed">
         {description}
       </p>
       <div className="flex items-end justify-between mt-4 gap-2 flex-wrap">
@@ -42,13 +32,13 @@ function RealCard({ title, description, tags, href, note }) {
           href={href}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-accent font-semibold hover:underline"
-          style={{ fontSize: 14 }}
+          className="text-accent font-semibold text-sm hover:text-accent-hover transition-colors"
         >
-          View site →
+          View site{' '}
+          <span aria-hidden="true" className="inline-block transition-transform duration-base ease-spring group-hover:translate-x-1">→</span>
         </a>
         {note && (
-          <span className="text-muted italic" style={{ fontSize: 11 }}>
+          <span className="text-muted italic text-xs">
             {note}
           </span>
         )}
@@ -75,29 +65,19 @@ export default function Work() {
   return (
     <section id="work" className="py-20 px-6">
       <div className="max-w-5xl mx-auto">
-        <p
-          className="text-accent font-semibold uppercase"
-          style={{ fontSize: 12, letterSpacing: '0.1em' }}
-        >
-          RECENT WORK
-        </p>
-        <h2
-          className="font-bold text-ink mt-2"
-          style={{ fontSize: 'clamp(28px, 4vw, 42px)' }}
-        >
-          Built by Coylabs Development
-        </h2>
-        <p className="text-muted mt-2" style={{ fontSize: 16 }}>
-          A selection of sites and apps I've built.
-        </p>
+        <SectionHeader
+          eyebrow="Recent work"
+          title="Built by Coylabs Development"
+          lede="A selection of sites and apps I've built."
+        />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
+        <Reveal stagger className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
           {work.filter((card) => !card.hidden).map((card) => (
             <RealCard key={card.id || card.title} {...card} />
           ))}
-        </div>
+        </Reveal>
 
-        <p className="text-center text-muted mt-10" style={{ fontSize: 14 }}>
+        <p className="text-center text-muted mt-10 text-sm">
           More work available on request. Get in touch to see examples relevant
           to your sector.
         </p>

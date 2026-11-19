@@ -48,6 +48,10 @@ src/
     IntakeForm.jsx   — 4-step multi-step form, Formspree POST, validation
     Chip.jsx         — Reusable chip/tag component (single + multi select)
     Footer.jsx       — Dark footer, inverted logo, nav links, copyright
+    SectionHeader.jsx — Shared eyebrow → headline → lede block for every section
+    Reveal.jsx       — Scroll reveal wrapper (`stagger` prop for grids)
+  hooks/
+    useReveal.js     — IntersectionObserver hook behind Reveal (fires once)
   content/
     work.js          — Recent Work items (Ross edits this directly)
   App.jsx

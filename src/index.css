@@ -2,6 +2,122 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Motion tokens (mirrors tailwind.config.js) for hand-written CSS below. */
+:root {
+  --ease-out: cubic-bezier(.22, 1, .36, 1);
+  --ease-in-out: cubic-bezier(.65, 0, .35, 1);
+  --ease-spring: cubic-bezier(.34, 1.56, .64, 1);
+  --dur-fast: 180ms;
+  --dur-base: 400ms;
+  --dur-slow: 700ms;
+}
+
 html {
   scroll-behavior: smooth;
+}
+
+@layer base {
+  h1, h2, h3 { text-wrap: balance; }
+  p { text-wrap: pretty; }
+}
+
+/* ---------- Scroll reveals (driven by src/hooks/useReveal.js) ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out);
+}
+.reveal.is-in { opacity: 1; transform: none; }
+
+/* ---------- Hero entrance (plays on load, not on scroll) ---------- */
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(0.35em); }
+  to   { opacity: 1; transform: none; }
+}
+.hero-word {
+  display: inline-block;
+  animation: rise-in var(--dur-slow) var(--ease-out) both;
+  animation-delay: calc(120ms + var(--i, 0) * 55ms);
+}
+.hero-fade {
+  animation: rise-in var(--dur-slow) var(--ease-out) both;
+  animation-delay: var(--d, 0ms);
+}
+
+/* ---------- Nav link "roll" ---------- */
+/* Markup: <a><span class="navroll"><span>Work</span><span aria-hidden>Work</span></span></a> */
+.navroll { position: relative; display: inline-block; overflow: hidden; vertical-align: top; }
+.navroll > span {
+  display: block;
+  transition: transform var(--dur-base) var(--ease-out);
+}
+.navroll > span:last-child { position: absolute; top: 100%; left: 0; }
+a:hover .navroll > span,
+a:focus-visible .navroll > span { transform: translateY(-100%); }
+
+/* ---------- Service icon micro-interactions ---------- */
+/* Globe: the meridian squashes like the globe turning. */
+@keyframes svc-globe {
+  0%   { transform: scaleX(1); }
+  50%  { transform: scaleX(0.15); }
+  100% { transform: scaleX(1); }
+}
+/* Code: the brackets push apart and settle. */
+@keyframes svc-code-l { 40% { transform: translateX(-3px); } 100% { transform: none; } }
+@keyframes svc-code-r { 40% { transform: translateX(3px); }  100% { transform: none; } }
+/* Refresh: one full turn. */
+@keyframes svc-refresh { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+.svc-icon * { transform-box: fill-box; transform-origin: center; }
+.svc-icon--refresh { transform-origin: center; }
+
+/* Desktop: play on hover. Touch: play once when the column scrolls in. */
+@media (hover: hover) {
+  .svc:hover .svc-icon--globe .meridian { animation: svc-globe 900ms var(--ease-in-out); }
+  .svc:hover .svc-icon--code .left      { animation: svc-code-l 600ms var(--ease-spring); }
+  .svc:hover .svc-icon--code .right     { animation: svc-code-r 600ms var(--ease-spring); }
+  .svc:hover .svc-icon--refresh         { animation: svc-refresh 800ms var(--ease-in-out); }
+}
+@media (hover: none) {
+  .is-in .svc-icon--globe .meridian { animation: svc-globe 900ms var(--ease-in-out) 500ms; }
+  .is-in .svc-icon--code .left      { animation: svc-code-l 600ms var(--ease-spring) 600ms; }
+  .is-in .svc-icon--code .right     { animation: svc-code-r 600ms var(--ease-spring) 600ms; }
+  .is-in .svc-icon--refresh         { animation: svc-refresh 800ms var(--ease-in-out) 700ms; }
+}
+
+/* ---------- Success tick draws in ---------- */
+@keyframes draw { to { stroke-dashoffset: 0; } }
+@keyframes pop-in {
+  from { opacity: 0; transform: scale(0.6); }
+  to   { opacity: 1; transform: none; }
+}
+.tick-badge { animation: pop-in var(--dur-base) var(--ease-spring) both; }
+.tick-draw circle {
+  stroke-dasharray: 70; stroke-dashoffset: 70;
+  animation: draw 500ms var(--ease-out) 150ms forwards;
+}
+.tick-draw polyline {
+  stroke-dasharray: 16; stroke-dashoffset: 16;
+  animation: draw 350ms var(--ease-out) 550ms forwards;
+}
+
+/* ---------- Soft accent glows behind key sections ---------- */
+.glow {
+  position: absolute;
+  pointer-events: none;
+  border-radius: 9999px;
+  background: radial-gradient(closest-side, rgb(0 200 255 / 0.12), rgb(0 200 255 / 0) 100%);
+}
+
+/* ---------- Reduced motion: show everything, move nothing ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+  }
+  .reveal { opacity: 1; transform: none; }
 }

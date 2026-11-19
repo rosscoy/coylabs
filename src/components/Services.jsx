@@ -1,8 +1,18 @@
+import Reveal from './Reveal'
+import SectionHeader from './SectionHeader'
+
+// Each icon has its own small animation (see "Service icon micro-interactions"
+// in index.css): the globe turns, the brackets push apart, the arrows spin once.
+const iconProps = {
+  width: 32, height: 32, viewBox: '0 0 32 32', fill: 'none', stroke: 'currentColor',
+  strokeWidth: 1.5, strokeLinecap: 'round', strokeLinejoin: 'round', 'aria-hidden': true,
+}
+
 function GlobeIcon() {
   return (
-    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="#00C8FF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <svg {...iconProps} className="svc-icon svc-icon--globe text-accent">
       <circle cx="16" cy="16" r="13" />
-      <ellipse cx="16" cy="16" rx="5.5" ry="13" />
+      <ellipse className="meridian" cx="16" cy="16" rx="5.5" ry="13" />
       <line x1="3" y1="16" x2="29" y2="16" />
       <line x1="5" y1="10" x2="27" y2="10" />
       <line x1="5" y1="22" x2="27" y2="22" />
@@ -12,16 +22,16 @@ function GlobeIcon() {
 
 function CodeIcon() {
   return (
-    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="#00C8FF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <polyline points="11 10 5 16 11 22" />
-      <polyline points="21 10 27 16 21 22" />
+    <svg {...iconProps} className="svc-icon svc-icon--code text-accent">
+      <polyline className="left" points="11 10 5 16 11 22" />
+      <polyline className="right" points="21 10 27 16 21 22" />
     </svg>
   )
 }
 
 function RefreshIcon() {
   return (
-    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="#00C8FF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <svg {...iconProps} className="svc-icon svc-icon--refresh text-accent">
       <path d="M27 6v7h-7" />
       <path d="M5 26v-7h7" />
       <path d="M7.5 13A11 11 0 0 1 25 11l2 2" />
@@ -52,43 +62,33 @@ export default function Services() {
   return (
     <section id="services" className="py-20 px-6">
       <div className="max-w-5xl mx-auto">
-        <p
-          className="text-accent font-semibold uppercase"
-          style={{ fontSize: 12, letterSpacing: '0.1em' }}
-        >
-          WHAT I BUILD
-        </p>
-        <h2
-          className="font-bold text-ink mt-2"
-          style={{ fontSize: 'clamp(28px, 4vw, 42px)' }}
-        >
-          From a landing page to a full web app.
-        </h2>
-        <p className="text-muted mt-2" style={{ fontSize: 16 }}>
-          Every project starts with a conversation.
-        </p>
+        <SectionHeader
+          eyebrow="What I build"
+          title="From a landing page to a full web app."
+          lede="Every project starts with a conversation."
+        />
 
         {/* Desktop 3-col, mobile stacked */}
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-3">
+        <Reveal stagger step={100} className="mt-12 grid grid-cols-1 md:grid-cols-3">
           {services.map((s, i) => (
             <div
               key={s.heading}
               className={[
-                'pt-12 pr-8',
+                'svc h-full pt-12 pr-8',
                 i < services.length - 1
                   ? 'md:border-r border-border md:border-b-0 border-b pb-12 md:pb-0'
                   : 'pb-0',
                 i > 0 ? 'md:pl-8' : '',
               ].join(' ')}
             >
-              <div style={{ marginBottom: 32 }}>{s.icon}</div>
+              <div className="mb-8">{s.icon}</div>
               <h3 className="font-bold text-ink text-lg">{s.heading}</h3>
-              <p className="text-muted mt-3" style={{ fontSize: 14, lineHeight: 1.7 }}>
+              <p className="text-muted mt-3 text-base leading-relaxed">
                 {s.copy}
               </p>
             </div>
           ))}
-        </div>
+        </Reveal>
       </div>
     </section>
   )
